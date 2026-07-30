@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Custom theme tokens land here as feature 0 defines them. Example shape: */
+/*
+@theme {
+  --color-status-read: #22c55e;
+  --color-status-currently-reading: #f97316;
+  --color-status-want-to-read: #3b82f6;
+}
+*/
