@@ -1,10 +1,41 @@
 @import "tailwindcss";
 
-/* Custom theme tokens land here as feature 0 defines them. Example shape: */
-/*
 @theme {
-  --color-status-read: #22c55e;
-  --color-status-currently-reading: #f97316;
-  --color-status-want-to-read: #3b82f6;
+  /* Status pills — tinted background + same-hue ink for the label on top of it.
+     Values read from Reading List.dc.html's PILL map, not project-overview.md's
+     hexes: the design never uses a saturated #22c55e anywhere. */
+  --color-status-read: oklch(0.93 0.05 150);
+  --color-status-read-ink: oklch(0.32 0.09 150);
+  --color-status-currently-reading: oklch(0.93 0.07 55);
+  --color-status-currently-reading-ink: oklch(0.4 0.13 55);
+  --color-status-want-to-read: oklch(0.93 0.045 250);
+  --color-status-want-to-read-ink: oklch(0.4 0.1 250);
+
+  /* Light page (home.html) — near-white ground, warm-grey hue 90 throughout. */
+  --color-page-bg: oklch(0.985 0.003 90);
+  --color-page-ink: oklch(0.22 0.01 90);
+  --color-page-muted: oklch(0.52 0.01 90);
+  --color-page-line: oklch(0.9 0.005 90);
+
+  /* Dark page (search.html) — cool blue-grey hue 260 throughout. */
+  --color-search-bg: oklch(0.19 0.012 260);
+  --color-search-card: oklch(0.24 0.014 260);
+  --color-search-line: oklch(0.32 0.014 260);
+  --color-search-ink: oklch(0.96 0.003 260);
+  --color-search-muted: oklch(0.65 0.01 260);
+
+  /* The two bands of the diagonal cover-placeholder stripe on a search card.
+     Kept as separate colours because the gradient itself is a background-image,
+     not a colour — feature 4 composes them. */
+  --color-search-stripe-a: oklch(0.27 0.014 260);
+  --color-search-stripe-b: oklch(0.3 0.012 260);
+
+  /* Shared across both pages: primary buttons and links. */
+  --color-accent: #111827;
+
+  /* Score stars. Filled is shared; the unfilled colour differs per page so the
+     ghost stars stay readable on their own ground. */
+  --color-star-filled: oklch(0.78 0.15 85);
+  --color-star-empty: oklch(0.86 0.006 90);
+  --color-search-star-empty: oklch(0.4 0.01 260);
 }
-*/
