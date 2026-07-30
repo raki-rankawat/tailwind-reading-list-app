@@ -34,6 +34,19 @@ This is a read-only, explanatory task. Do not modify any source files. Do not ch
 
 6. **Do not touch `context/current-feature.md`, the feature spec itself, or any source file.** This skill only reads and produces one new file.
 
+## How to write it
+
+Write like a teacher explaining to a student who has never used Tailwind, not like reference documentation. A correct note that reads as a dense wall of prose has failed at its only job. Aim for *fewer ideas, better shown* — it is fine for the file to be physically larger if the extra bytes are diagrams and whitespace rather than sentences.
+
+- **Lead with a picture, not a paragraph.** Open with a diagram of the whole thing — the pipeline, the page layout, the element hierarchy — so the shape is visible before any detail
+- **Structure as numbered parts, each answering one question in the student's own words** — "what is `@theme`?", "where did my colours go?", "why two colours per status?" — rather than as topic headings like "Concept 3: token architecture"
+- **Draw anything that can be drawn.** Flowcharts for build/scan behaviour, labelled call-outs for unfamiliar syntax, before/after pairs for a decision that went one way instead of another, side-by-side ✔/✘ blocks for a trap that was avoided
+- **Use ASCII art inside fenced code blocks, not Mermaid.** VS Code's built-in Markdown preview does not render Mermaid without an extension, so a Mermaid diagram shows up as raw code. ASCII renders everywhere
+- **Show the concrete example before the general rule.** Give the actual class string from the diff, then explain what it does
+- **Stop and explain syntax a beginner hasn't met**, even when it's incidental to the feature — what `bg-[…]` square brackets mean, why arbitrary values use underscores instead of spaces, how a `md:` prefix reads
+- **Close with a cheat-sheet table** of what this feature makes available to the next one
+- Follow the Markdown rules in @context/coding-standards.md — in particular, never hard-wrap prose paragraphs
+
 ## Notes
 
 - This folder (`context/understanding/`) is a personal learning reference, not part of the always-loaded context in @CLAUDE.md — it will grow large over time and isn't needed for every session.

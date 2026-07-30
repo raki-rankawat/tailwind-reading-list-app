@@ -31,6 +31,15 @@
 - Files: kebab-case, matching the screen-state name in `project-overview.md` (`home-populated.html`, not `HomePopulated.html` or `home_populated.html`)
 - Custom Tailwind theme tokens: kebab-case, prefixed by what they're for (`--color-status-read`, `--color-search-bg`)
 
+## Markdown
+
+Applies to every `.md` file written here — `README.md`, anything in `context/`, and the learning notes in `context/understanding/`.
+
+- **Never hard-wrap a prose paragraph.** One paragraph is one line, however long it runs. The existing files in `context/` sit at 250–490 characters per line; match that, don't wrap at 80 or 100
+- The reason is not style: Markdown previews in this project's editor render a single newline as a `<br>`, so every hard wrap becomes a visible line break mid-sentence in the rendered output. Source that looks tidy reads as broken text
+- Line breaks stay meaningful inside tables, list items, and fenced code blocks — keep the line structure there, the rule is about prose only
+- No trailing whitespace, and end the file with exactly one newline
+
 ## Code Quality
 
 - No commented-out markup left in a finished file
