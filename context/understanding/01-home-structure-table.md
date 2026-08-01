@@ -2,7 +2,50 @@
 
 A walkthrough of `home.html`, written one component at a time as each one is built. Assumes you've read `00-setup.md` — this note takes the tokens defined there and finally spends them.
 
-**Spec:** `context/features/01-home-structure-table.md` · **Design:** `Reading List.dc.html`
+**Commit:** `021492f` · **Spec:** `context/features/01-home-structure-table.md` · **Design:** `Reading List.dc.html`
+
+---
+
+## The whole feature in one picture
+
+The screen was built in four stops, each one a complete component rather than a layer smeared across the page:
+
+```
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  My Reading List                            ┌──────────────┐     │  STOP 1
+  │  6 books                                    │  + Add Book  │     │  page shell
+  │                                             └──────────────┘     │  + header
+  └──────────────────────────────────────────────────────────────────┘
+  ┌──────────────────────────────────────────────────────────────────┐
+  │  NAME      TYPE      STATUS      SCORE   AUTHOR      LINK        │  STOP 2
+  ├──────────────────────────────────────────────────────────────────┤  card frame
+  │  Klara…    Fiction   ╭ Read ╮    ★★★★☆   Kazuo…      Goodreads   │  STOP 3
+  ├──────────────────────────────────────────────────────────────────┤  ONE row,
+  │  Project…  Sci-Fi    ╭ Read ╮    ★★★★★   Andy…       Amazon      │  every idea
+  │  Sapiens…  Non-Fic   ╭ Curr… ╮   ★★★★☆   Yuval…      Goodreads   │
+  │  Midnight… Fiction   ╭ Want… ╮   ☆☆☆☆☆   Matt…       Goodreads   │  STOP 4
+  │  Educated  Memoir    ╭ Read ╮    ★★★★★   Tara…       Amazon      │  ×5 more —
+  │  Dune      Sci-Fi    ╭ Curr… ╮   ★★★★☆   Frank…      Goodreads   │  4 new classes
+  └──────────────────────────────────────────────────────────────────┘
+```
+
+That ordering is the whole method: **stop 3 is where you think, stop 4 is where it sticks.** By the time five more rows go in, the pattern is already understood and the repetition is reinforcement rather than a wall of unfamiliar text.
+
+And here's where the colours came from — feature 0 did almost all of this work in advance:
+
+```
+   src/input.css                              home.html
+  ┌────────────────────────┐                 ┌──────────────────────────────┐
+  │  18 tokens             │                 │  bg-page-bg   text-page-ink  │
+  │  written in feature 0  │ ───────────────►│  bg-status-read              │
+  │  before any markup     │   named, so     │  text-status-read-ink        │
+  │                        │   never a hex   │  text-star-filled            │
+  │  + 1 added here:       │                 │  hover:bg-page-row-hover     │
+  │    page-row-hover      │                 │                              │
+  └────────────────────────┘                 └──────────────────────────────┘
+```
+
+**One** new colour was needed for an entire screen. That's the return on having defined tokens first.
 
 ---
 
@@ -49,7 +92,7 @@ A walkthrough of `home.html`, written one component at a time as each one is bui
 | Class | The CSS it generates | Why this one |
 |---|---|---|
 | `mx-auto` | `margin-inline: auto` | Centres the column. See call-out 3 — this does nothing without a width limit next to it |
-| `max-w-[1100px]` | `max-width: 1100px` | The design says `max-width:1100px`. Square brackets because Tailwind has no name for 1100 — see call-out 2 |
+| `max-w-275` | `max-width: calc(var(--spacing) * 275)` = **1100px** | The design says `max-width:1100px`. `275 × 4px` — this lands on the spacing scale, which surprised me. See call-out 2 |
 | `pt-14` | `padding-top: calc(var(--spacing) * 14)` = **56px** | Design: `padding: 56px 32px 80px`. See call-out 1 for where 14 → 56 comes from |
 | `px-8` | `padding-inline: calc(var(--spacing) * 8)` = **32px** | The `x` means left *and* right at once. `inline` rather than `left`/`right` — call-out 6 |
 | `pb-20` | `padding-bottom: calc(var(--spacing) * 20)` = **80px** | Bottom padding is bigger than top on purpose: it stops the last table row from sitting flush against the bottom of the window |
@@ -120,28 +163,51 @@ So **to convert a design's pixel value into a Tailwind class, divide by 4.** The
 
 Every single spacing value in this header divided cleanly. That is not luck — the design was drawn on a 4px grid, which is the same grid Tailwind assumes.
 
-### Call-out 2 — What the square brackets mean
+### Call-out 2 — What the square brackets mean, and the trap in reaching for them
 
-`max-w-[1100px]`, `text-[28px]` and `tracking-[-0.01em]` all have brackets. They're saying: **"Tailwind, you don't have a name for this. Use this literal value."**
+`text-[28px]` and `tracking-[-0.01em]` have brackets. They're saying: **"Tailwind, you don't have a name for this. Use this literal value."**
 
 ```
-      max-w-2xl        max-w-[1100px]
-      └──┬──┘          └──┬──┘└──┬──┘
-      a NAME Tailwind    the      the exact value
-      already knows      family   you're forcing in
+      text-2xl         text-[28px]
+      └──┬──┘          └─┬─┘└──┬──┘
+      a NAME Tailwind    the    the exact value
+      already knows      family you're forcing in
 ```
 
-Why these three needed it:
+Why those two needed it:
 
 ```
    WANTED            NEAREST NAMES            VERDICT
-   1100px      max-w-5xl=1024  6xl=1152   ✘ straddles — 76px out either way
-   28px        text-2xl=24     3xl=30     ✘ straddles
+   28px        text-2xl=24     3xl=30     ✘ straddles — no name fits
    -0.01em     tracking-tight = -0.025em  ✘ nearest name is 2.5× too tight
    56px        pt-14 = 56px               ✔ exact — no brackets
 ```
 
-The coding standards say reach for brackets **only** when the design genuinely misses the scale, and to write down why. That's what the table above is doing. A file full of `p-[17px]` means you stopped using the design system.
+**Now the trap, which this file fell into.** The page width was first written as `max-w-[1100px]`, on the reasoning that `max-w-5xl` is 1024px and `max-w-6xl` is 1152px, so 1100 straddles them. The Tailwind IDE extension flagged it:
+
+> The class `max-w-[1100px]` can be written as `max-w-275`
+
+It was right. **The spacing scale from call-out 1 isn't only for padding and margin** — width, height, and max-width all take a bare number that means the same "× 4px":
+
+```
+      max-w-5xl    a NAMED size    1024px  ─┐  these are the ones
+      max-w-6xl    a NAMED size    1152px  ─┘  that straddle 1100
+
+      max-w-275    275 × 4px       1100px  ←   but this exists too, and is exact
+```
+
+So there were **two** scales available and only one was checked. The named `-xl` sizes are for content columns at conventional widths; the numeric scale reaches any multiple of 4px. 1100 ÷ 4 = 275, a whole number, so no brackets were ever justified.
+
+```
+   ✘ max-w-[1100px]                ✔ max-w-275
+     escapes the design system       stays inside it
+     for a value that was            for the identical
+     inside it all along             computed width
+```
+
+The general lesson is the one the coding standards are getting at: reach for brackets **only** after checking the scale properly, and write down why. A file full of `p-[17px]` means you stopped using the design system. This one nearly had a `max-w-[1100px]` that meant you'd stopped checking it.
+
+Practical takeaway: **divide the design's pixel value by 4 first.** Whole number → there's a scale class for it. Fraction → brackets are honest.
 
 ### Call-out 3 — How `mx-auto` actually centres
 
@@ -811,3 +877,63 @@ Every row carries `border-b`, including the last one — so the final row's bott
 ```
 
 This is faithful to the design, which also puts `border-bottom` on every row without exempting the last. It's a common thing to "fix" with a `last:border-b-0` variant — but that would be a deviation from the reference, so it stays. Noted here so you know it was seen and decided, not missed.
+
+---
+
+## Cheat-sheet — patterns this feature makes reusable
+
+Five class strings were established here that feature 2's drawer needs. Copy the pattern, change the values the design changes:
+
+| Pattern | The class string | What feature 2 does with it |
+|---|---|---|
+| **Status pill** | `inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-… text-status-…-ink` | The drawer shows status as a real `<select>`, **not** a pill — check the design before assuming otherwise, the spec warns your old build got this wrong once |
+| **Star row** | `inline-flex gap-0.5 text-sm` + `text-star-filled` / `text-star-empty` | Same structure, bigger: the drawer's stars are 17px, so the wrapper becomes `text-[17px]` |
+| **Card surface** | `overflow-hidden rounded-xl border border-page-line bg-white shadow-xs` | The drawer panel is also `#fff`, but with a much heavier shadow and no border |
+| **Field label** | `text-[11.5px] font-semibold uppercase tracking-wider text-page-muted` | The drawer's field labels are the same treatment at **11px**, not 11.5px — so `text-[11px]`. Easy to copy wrong |
+| **Focus ring** | `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent` | Reuse verbatim on the close `×`, the `<select>` and the Delete button |
+
+### Every concept introduced, in one list
+
+| Concept | Where | Short version |
+|---|---|---|
+| Spacing scale | call-out 1 | Every spacing class is `n × 4px`. Divide the design's pixels by 4 |
+| Arbitrary values | call-out 2 | `[…]` escapes the system. Check **both** the named and numeric scales first |
+| `mx-auto` | call-out 3 | Does nothing without a width limit beside it |
+| `hover:` prefix | call-out 4 | Compiles to `:hover`, and is auto-disabled on touch devices |
+| `focus-visible:` | call-out 5 | Keyboard focus only — `focus:` also fires on mouse clicks |
+| Logical properties | call-out 6 | `px-*` is `padding-inline`, not `padding-left`/`right` |
+| `overflow-hidden` + rounding | call-outs 7, 17 | A parent's `rounded-*` only clips children if you say so |
+| Border width vs colour | call-out 8 | `border` sets width, `border-…` sets colour. You need both |
+| `<th>` defaults | call-out 9 | Browsers centre `<th>`; `text-left` overrides it |
+| Content vs presentation | call-outs 10, 20 | `uppercase` not typed capitals; `aria-label` not five ★ glyphs |
+| Exact name matches | call-out 11 | `tracking-wider` really is the design's `.05em` — use the name |
+| Token pairs | call-outs 12, 19 | Same hue, different lightness. Background 0.93, ink 0.32–0.40 |
+| `inline-block` | call-out 13 | Plain `inline` renders vertical padding but reserves no space |
+| Inheritance | call-out 14 | `font-size` and `color` inherit; padding, border, display do not |
+| `whitespace-nowrap` | call-out 15 | Widens the column instead of breaking the text |
+| Weight hierarchy | call-out 16 | Smaller text needs more weight, not less |
+| Deliberate repetition | call-out 21 | Six hand-written rows is the exercise, not a failure of it |
+
+---
+
+## What feature 2 starts with
+
+A finished `home.html` to build on top of, and a table it can copy wholesale — feature 2 stacks a **second copy** of this table below the first, with the drawer open over it.
+
+Colours are nearly all in place. Feature 0 deliberately deferred two pairs that feature 2 now needs:
+
+```
+   the Delete button's danger pair          the light stripe pair
+   ┌──────────────────────────────┐        ┌──────────────────────────────┐
+   │ border oklch(0.75 0.14 25)   │        │ oklch(0.92 0.005 90)         │
+   │ text   oklch(0.5  0.16 25)   │        │ oklch(0.95 0.003 90)         │
+   └──────────────────────────────┘        └──────────────────────────────┘
+     same pale-bg/dark-ink idea as            the drawer's cover placeholder,
+     the status pills, at hue 25 (red)        built the same way as feature 4's
+                                              dark stripe — a background-image,
+                                              so two colour tokens, not one
+```
+
+Three things in this feature are inventions rather than translations, and feature 2 should extend them consistently rather than re-deciding: **the Add Book button's `hover:opacity-90`**, **the links' `hover:underline`**, and **the shared `focus-visible` ring**. The design specifies no interaction states anywhere, and `coding-standards.md` requires them on everything interactive — so the drawer's close `×`, its `<select>` and its Delete button will each need one too.
+
+One structural thing to carry across: everything visual in this screen hangs off a `<span>` or `<a>` **inside** the cell, never off the `<td>` itself. The drawer is a `<div role="dialog">` with the same discipline — style the contents, let the container just be a container.
