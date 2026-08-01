@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Reading List</title>
+    <link rel="stylesheet" href="dist/output.css" />
+  </head>
+  <body class="min-h-screen bg-page-bg">
+    <main class="mx-auto max-w-[1100px] pt-14 px-8 pb-20">
+      <header class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-[28px] font-semibold tracking-[-0.01em] text-page-ink">
+            My Reading List
+          </h1>
+          <p class="mt-1.5 text-sm text-page-muted">6 books</p>
+        </div>
+        <button
+          type="button"
+          class="rounded-lg px-5 py-2.5 text-sm font-semibold bg-accent text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          + Add Book
+        </button>
+      </header>
+
+      <div
+        class="overflow-hidden rounded-xl border border-page-line bg-white shadow-xs"
+      >
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-page-line">
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Name
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Type
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Status
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Score
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Author
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-3.5 text-left text-[11.5px] font-semibold uppercase tracking-wider text-page-muted"
+              >
+                Link
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                Klara and the Sun
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Fiction
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-read text-status-read-ink"
+                  >Read</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="4 out of 5"
+                >
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Kazuo Ishiguro
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.goodreads.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Goodreads</a
+                >
+              </td>
+            </tr>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                Project Hail Mary
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Sci-Fi
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-read text-status-read-ink"
+                  >Read</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="5 out of 5"
+                >
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Andy Weir
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.amazon.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Amazon</a
+                >
+              </td>
+            </tr>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                Sapiens
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Non-Fiction
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-currently-reading text-status-currently-reading-ink"
+                  >Currently Reading</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="4 out of 5"
+                >
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Yuval Noah Harari
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.goodreads.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Goodreads</a
+                >
+              </td>
+            </tr>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                The Midnight Library
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Fiction
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-want-to-read text-status-want-to-read-ink"
+                  >Want to Read</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="0 out of 5"
+                >
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Matt Haig
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.goodreads.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Goodreads</a
+                >
+              </td>
+            </tr>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                Educated
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Memoir
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-read text-status-read-ink"
+                  >Read</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="5 out of 5"
+                >
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Tara Westover
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.amazon.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Amazon</a
+                >
+              </td>
+            </tr>
+            <tr class="border-b border-page-line hover:bg-page-row-hover">
+              <td
+                class="px-5 py-4 text-[14.5px] font-medium whitespace-nowrap text-page-ink"
+              >
+                Dune
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Sci-Fi
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-block rounded-full px-3 py-1 text-xs font-semibold whitespace-nowrap bg-status-currently-reading text-status-currently-reading-ink"
+                  >Currently Reading</span
+                >
+              </td>
+              <td class="px-5 py-4">
+                <span
+                  class="inline-flex gap-0.5 text-sm"
+                  role="img"
+                  aria-label="4 out of 5"
+                >
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-filled" aria-hidden="true">&#9733;</span>
+                  <span class="text-star-empty" aria-hidden="true">&#9733;</span>
+                </span>
+              </td>
+              <td
+                class="px-5 py-4 text-[13.5px] whitespace-nowrap text-page-muted"
+              >
+                Frank Herbert
+              </td>
+              <td class="px-5 py-4">
+                <a
+                  href="https://www.goodreads.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="text-[13.5px] font-medium text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >Goodreads</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

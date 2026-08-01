@@ -16,6 +16,9 @@
   --color-page-ink: oklch(0.22 0.01 90);
   --color-page-muted: oklch(0.52 0.01 90);
   --color-page-line: oklch(0.9 0.005 90);
+  /* Table row hover. Barely darker than the card's white but lighter than the
+     page behind it, so a hovered row lifts without looking selected. */
+  --color-page-row-hover: oklch(0.98 0.003 90);
 
   /* Dark page (search.html) — cool blue-grey hue 260 throughout. */
   --color-search-bg: oklch(0.19 0.012 260);

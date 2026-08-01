@@ -15,13 +15,13 @@ This is the workflow for every feature/screen-state:
 1. **Document** - Copy the feature's goal into @context/current-feature.md, status "In Progress"
 2. **Branch** - Create a branch for the feature (see Branching below)
 3. **Read the design** - Read the relevant part of `Reading List.dc.html` fresh, per @context/project-overview.md — don't work from memory of the old React build
-4. **Implement, one part at a time** - Build the screen's markup and classes incrementally (structure first, then spacing, then color/typography, then responsive/state variants). Pause after each part for the human to look at it in a browser before continuing — this is a learning project, so the human driving the pacing matters more than speed
+4. **Implement, one component at a time** - Break the screen into its visual components (header, table frame, a single row, the drawer panel, a search card) and build them one at a time, each finished through every layer — structure, spacing, typography, colour, hover/focus — before the next one starts. Pause after each component for the human to look at it in a browser before continuing — this is a learning project, so the human driving the pacing matters more than speed. Slice vertically, never horizontally: a pause covering one small component is a short class list attached to one thing on screen, which is reviewable, whereas a pause covering the whole page in a single layer is a wall of classes however thin that layer is. Before pausing, append that component's section to the screen's note in `context/understanding/` — the explanation belongs at the moment the classes are on screen and fresh, not months later at the end of the feature (see Learning Notes below)
 5. **Check in browser** - Open the file directly. There's no build step to fail — "does it look right" is the only test that exists here
 6. **Iterate** - Fix anything that doesn't match the design reference
 7. **Commit** - Only after the human has looked at it and is happy
 8. **Merge** - Merge to main
 9. **Delete Branch** - After merge
-10. **Explain** - Ask whether the human wants a short learning note written to `context/understanding/` for this screen (see below) — every time, don't assume
+10. **Polish the note** - The screen's note in `context/understanding/` already exists by now, written component by component during step 4. Finish it rather than write it: add the opening "whole feature in one picture" diagram, the closing cheat-sheet table, and a short section on what the next feature starts with
 11. Mark completed in @context/current-feature.md and add to history
 
 Do NOT commit without the human confirming they've actually looked at the result. A file that "should be correct" per the spec but hasn't been eyeballed isn't done — the whole point is building the muscle memory of writing Tailwind and seeing what it produces.
@@ -49,4 +49,8 @@ One branch per screen-state, named `feature/[screen-name]` (e.g. `feature/home-p
 
 ## Learning Notes
 
-Each screen-state's understanding note (if the human asks for one) should focus on the Tailwind concepts it exercised — e.g. "why `grid-cols-[repeat(auto-fill,minmax(...))]` instead of a fixed `grid-cols-4`", or "why the dark card grid needed its own `@theme` tokens instead of reusing the light-mode ones" — not on app logic, since there isn't any here.
+Every screen-state gets an understanding note at `context/understanding/<number>-<name>.md`, and it is never optional — it is written one section at a time, as each component is built, and committed alongside the component it explains.
+
+Each component's section covers **every class in that component** in a table (the class, the CSS it generates, and why that one rather than a near neighbour), followed by diagram-led call-outs for any concept appearing for the first time — e.g. "why `grid-cols-[repeat(auto-fill,minmax(...))]` instead of a fixed `grid-cols-4`", or "why the dark card grid needed its own `@theme` tokens instead of reusing the light-mode ones". Assume the reader has never used Tailwind and stop to explain incidental syntax, not just the feature's headline ideas. Never on app logic, since there isn't any here.
+
+`.claude/skills/understand-feature/SKILL.md` has the full house style — lead with a picture, ASCII art rather than Mermaid, concrete example before general rule.
